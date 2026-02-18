@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Altura Tech services: Custom software development, digital infrastructure, and ongoing maintenance.">
+  <title>Services | Altura Tech</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-base:        #0D0F14;
+      --bg-elevated:    #13161D;
+      --bg-card:        #161921;
+      --border:         rgba(255,255,255,0.07);
+      --border-hover:   rgba(59,130,246,0.35);
+      --blue:           #3B82F6;
+      --blue-dark:      #2563EB;
+      --purple:         #7C3AED;
+      --text-primary:   #F0F2F5;
+      --text-secondary: #9CA3AF;
+      --text-muted:     #4B5563;
+      --mono:           'DM Mono', monospace;
+      --sans:           'DM Sans', system-ui, sans-serif;
+      --glow:           0 0 60px rgba(59,130,246,0.12);
+      --glow-strong:    0 0 40px rgba(59,130,246,0.22);
+      --radius:         10px;
+      --radius-sm:      6px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--sans);
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--text-primary);
+      background: var(--bg-base);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    img { display: block; max-width: 100%; }
+    .container { max-width: 1160px; margin: 0 auto; padding: 0 2rem; }
+    .reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.7s ease-out, transform 0.7s ease-out; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1.5rem 0; transition: background 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease; }
+    .header.scrolled { background: rgba(13,15,20,0.85); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); padding: 1rem 0; box-shadow: 0 1px 0 var(--border); }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; }
+    .logo { font-size: 1.2rem; font-weight: 600; letter-spacing: -0.02em; color: var(--text-primary); }
+    .logo span { color: var(--blue); }
+    .nav { display: flex; align-items: center; gap: 2.5rem; }
+    .nav-link { font-size: 0.9rem; font-weight: 400; color: var(--text-secondary); transition: color 0.2s; }
+    .nav-link:hover, .nav-link.active { color: var(--text-primary); }
+    .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.65rem 1.4rem; border-radius: var(--radius-sm); font-family: var(--sans); font-size: 0.9rem; font-weight: 500; cursor: pointer; border: none; transition: all 0.25s ease; text-decoration: none; }
+    .btn-primary { background: var(--blue); color: #fff; }
+    .btn-primary:hover { background: var(--blue-dark); box-shadow: var(--glow-strong); transform: translateY(-1px); }
+    .btn-secondary { background: transparent; color: var(--text-primary); border: 1px solid var(--border); }
+    .btn-secondary:hover { border-color: var(--border-hover); background: rgba(59,130,246,0.06); }
+    .btn-lg { padding: 0.9rem 2rem; font-size: 1rem; }
+    .menu-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+    .menu-toggle span { display: block; width: 22px; height: 1.5px; background: var(--text-primary); transition: all 0.25s ease; }
+    .menu-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(4.5px, 4.5px); }
+    .menu-toggle.open span:nth-child(2) { opacity: 0; }
+    .menu-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(4.5px, -4.5px); }
+    @media (max-width: 768px) {
+      .menu-toggle { display: flex; }
+      .nav { position: fixed; inset: 0 0 0 auto; width: 280px; background: var(--bg-elevated); border-left: 1px solid var(--border); flex-direction: column; align-items: flex-start; gap: 0; padding: 5rem 2rem 2rem; transform: translateX(100%); transition: transform 0.3s ease; }
+      .nav.open { transform: translateX(0); }
+      .nav-link { padding: 0.75rem 0; font-size: 1.1rem; width: 100%; border-bottom: 1px solid var(--border); }
+      .nav .btn { margin-top: 1rem; width: 100%; justify-content: center; }
+    }
+    section { padding: 7rem 0; }
+    .section-label { font-family: var(--mono); font-size: 0.75rem; color: var(--blue); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem; }
+    .section-title { font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 600; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 1rem; }
+    .section-sub { font-size: 1.05rem; color: var(--text-secondary); line-height: 1.7; max-width: 580px; }
+    .section-header { margin-bottom: 4rem; }
+    .section-header.centered { text-align: center; }
+    .section-header.centered .section-sub { margin: 0 auto; }
+    .page-hero { padding: calc(8rem + 60px) 0 5rem; }
+    .page-hero h1 { font-size: clamp(2.2rem, 4.5vw, 3.2rem); font-weight: 600; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 1.25rem; }
+    .page-hero p { font-size: 1.1rem; color: var(--text-secondary); line-height: 1.7; max-width: 620px; }
+    .tag { font-family: var(--mono); font-size: 0.72rem; padding: 0.35rem 0.85rem; border: 1px solid rgba(59,130,246,0.3); border-radius: 20px; color: var(--blue); background: rgba(59,130,246,0.06); letter-spacing: 0.04em; display: inline-block; }
+    .cta-section { text-align: center; position: relative; overflow: hidden; }
+    .cta-section::before { content: ''; position: absolute; bottom: -40%; left: 50%; transform: translateX(-50%); width: 700px; height: 400px; background: radial-gradient(ellipse, rgba(59,130,246,0.08) 0%, transparent 65%); pointer-events: none; }
+    .cta-section h2 { font-size: clamp(1.8rem, 3.5vw, 2.5rem); font-weight: 600; letter-spacing: -0.02em; margin-bottom: 1rem; }
+    .cta-section p { font-size: 1.05rem; color: var(--text-secondary); max-width: 540px; margin: 0 auto 2.5rem; line-height: 1.7; }
+    .footer { background: var(--bg-elevated); border-top: 1px solid var(--border); padding: 4rem 0 2rem; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+    .footer-brand p { font-size: 0.88rem; color: var(--text-secondary); margin-top: 0.75rem; line-height: 1.65; max-width: 220px; }
+    .footer-col h5 { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin-bottom: 1.25rem; }
+    .footer-col a { display: block; font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 0.65rem; transition: color 0.2s; }
+    .footer-col a:hover { color: var(--text-primary); }
+    .footer-bottom { padding-top: 2rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; color: var(--text-muted); }
+    @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; } .footer-brand { grid-column: span 2; } .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; } }
+    @media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } .footer-brand { grid-column: span 1; } }
+
+    .svc-hero-bg { background: var(--bg-elevated); border-bottom: 1px solid var(--border); }
+    .service-block { margin-bottom: 1px; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--radius); padding: 3rem; margin-bottom: 2rem; }
+    .service-block h2 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 600; letter-spacing: -0.02em; margin: 0.5rem 0 1rem; }
+    .service-block .intro { font-size: 1.05rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 2rem; max-width: 700px; }
+    .caps-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; margin-bottom: 2rem; }
+    .cap { display: flex; gap: 0.75rem; align-items: flex-start; font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5; }
+    .cap-arrow { color: var(--blue); flex-shrink: 0; margin-top: 1px; }
+    .outcomes-box { background: var(--bg-base); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 1.5rem 2rem; margin-bottom: 1.5rem; }
+    .outcomes-box h4 { font-family: var(--mono); font-size: 0.72rem; color: var(--blue); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.6rem; }
+    .outcomes-box p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.65; }
+    @media (max-width: 640px) { .caps-grid { grid-template-columns: 1fr; } .service-block { padding: 2rem 1.5rem; } }
+</style>
+</head>
+<body>
+  <header class="header" id="header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="index.html" class="logo">Altura<span>.</span></a>
+        <nav class="nav" id="nav">
+          <a href="index.html" class="nav-link ">Home</a>
+          <a href="services.html" class="nav-link active">Services</a>
+          <a href="about.html" class="nav-link ">About</a>
+          <a href="projects.html" class="nav-link ">Projects</a>
+          <a href="contact.html" class="nav-link ">Contact</a>
+          <a href="contact.html" class="btn btn-primary">Start a Project</a>
+        </nav>
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+  <!-- HERO -->
+  <section class="svc-hero-bg page-hero">
+    <div class="container">
+      <div class="tag reveal">Three Core Capabilities</div>
+      <h1 class="reveal reveal-delay-1">What We Build</h1>
+      <p class="reveal reveal-delay-2">Structured solutions engineered to improve operations, establish reliable digital presence, and maintain systems at full capacity over time.</p>
+    </div>
+  </section>
+
+  <!-- SERVICE BLOCKS -->
+  <section>
+    <div class="container">
+
+      <!-- 01 Custom Software -->
+      <div id="software" class="service-block reveal">
+        <div class="tag">01 / Custom Software Development</div>
+        <h2>Custom Software Development</h2>
+        <p class="intro">We build software systems tailored to specific operational needs. Each application is engineered to solve defined problems, integrate with existing workflows, and scale as requirements evolve.</p>
+        <div class="caps-grid">
+          <div class="cap"><span class="cap-arrow">→</span><span>Web applications with complex business logic and user workflows</span></div>
+          <div class="cap"><span class="cap-arrow">→</span><span>Internal business systems for data management and operations</span></div>
+          <div class="cap"><span class="cap-arrow">→</span><span>Process automation tools that eliminate repetitive manual tasks</span></div>
+          <div class="cap"><span class="cap-arrow">→</span><span>API development and third-party service integration</span></div>
+        </div>
+        <div class="outcomes-box">
+          <h4>Expected Outcomes</h4>
+          <p>Custom software eliminates operational bottlenecks and reduces manual workload. Organizations gain tools that fit their exact processes rather than forcing processes to fit generic software.</p>
+        </div>
+        <a href="contact.html" class="btn btn-secondary">Discuss Your Project</a>
+      </div>
+
+      <!-- 02 Digital Infrastructure -->
+      <div id="infrastructure" class="service-block reveal">
+        <div class="tag">02 / Digital Presence & Infrastructure</div>
+        <h2>Digital Presence & Infrastructure</h2>
+        <p class="intro">We establish complete digital foundations that represent your organization professionally and function reliably. This includes everything from domain acquisition to fully deployed web platforms.</p>
+        <div class="caps-grid">
+          <div class="cap"><span class="cap-arrow">→</span><span>Corporate websites optimized for performance and lead conversion</span></div>
+          <div class="cap"><span class="cap-arrow">→</span><span>School portals with student, parent, and staff access systems</span></div>
+          <div class="cap"><span class="cap-arrow">→</span><span>Business email configuration with professional domain addresses</span></div>
+          <div class="cap"><span class="cap-arrow">→</span><span>Domain registration, DNS management, and hosting setup</span></div>
+        </div>
+        <div class="outcomes-box">
+          <h4>Expected Outcomes</h4>
+          <p>Your organization gains a digital presence that functions as a reliable asset. Websites load quickly, email works consistently, and technical infrastructure requires minimal ongoing attention from internal teams.</p>
+        </div>
+        <a href="contact.html" class="btn btn-secondary">Discuss Your Project</a>
+      </div>
+
+      <!-- 03 Maintenance -->
+      <div id="maintenance" class="service-block reveal">
+        <div class="tag">03 / Maintenance & Technical Support</div>
+        <h2>Maintenance & Technical Support</h2>
+        <p class="intro">We provide ongoing technical stewardship for digital systems. Software remains current, secure, and performing optimally without requiring constant internal technical oversight.</p>
+        <div class="caps-grid">
+          <div class="cap"><span class="cap-arrow">→</span><span>Regular software updates and security patches</span></div>
+          <div class="cap"><span class="cap-arrow">→</span><span>Bug identification and resolution with defined response times</span></div>
+          <div class="cap"><span class="cap-arrow">→</span><span>Performance monitoring and optimization</span></div>
+          <div class="cap"><span class="cap-arrow">→</span><span>Feature enhancements and iterative improvements</span></div>
+          <div class="cap"><span class="cap-arrow">→</span><span>Documentation updates and knowledge transfer</span></div>
+          <div class="cap"><span class="cap-arrow">→</span><span>Technical support with structured escalation</span></div>
+        </div>
+        <div class="outcomes-box">
+          <h4>Expected Outcomes</h4>
+          <p>Systems remain operational, secure, and current without consuming internal resources. Technical issues are addressed before they impact operations. Organizations avoid the cost of maintaining specialized in-house expertise.</p>
+        </div>
+        <a href="contact.html" class="btn btn-secondary">Discuss Your Project</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container">
+      <h2 class="reveal">Not Sure Which Service You Need?</h2>
+      <p class="reveal">Schedule a consultation to discuss your requirements. We'll clarify what needs to be built and provide a clear recommendation.</p>
+      <a href="contact.html" class="btn btn-primary btn-lg reveal">Request a Consultation</a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo">Altura<span style="color:var(--blue)">.</span></div>
+          <p>Engineering digital systems that move organizations forward.</p>
+        </div>
+        <div class="footer-col">
+          <h5>Navigation</h5>
+          <a href="index.html">Home</a>
+          <a href="services.html">Services</a>
+          <a href="about.html">About</a>
+          <a href="projects.html">Projects</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h5>Services</h5>
+          <a href="services.html">Custom Software</a>
+          <a href="services.html">Digital Infrastructure</a>
+          <a href="services.html">Maintenance & Support</a>
+        </div>
+        <div class="footer-col">
+          <h5>Contact</h5>
+          <a href="mailto:contact@alturatech.com">contact@alturatech.com</a>
+          <a href="contact.html">Request Consultation</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Altura Tech. All rights reserved.</span>
+        <span>Engineering partner for serious digital products.</span>
+      </div>
+    </div>
+  </footer>
+  <script>
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => { header.classList.toggle('scrolled', window.scrollY > 50); }, { passive: true });
+    const menuToggle = document.getElementById('menuToggle');
+    const nav = document.getElementById('nav');
+    menuToggle.addEventListener('click', () => {
+      const isOpen = nav.classList.toggle('open');
+      menuToggle.classList.toggle('open', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+    nav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => { nav.classList.remove('open'); menuToggle.classList.remove('open'); document.body.style.overflow = ''; });
+    });
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
